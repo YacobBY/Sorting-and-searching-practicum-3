@@ -63,8 +63,10 @@ public class BoyerMoore {
 
         // position of rightmost occurrence of c in the pattern
         movementArray = new int[R];
+        //Set every possible character to -1
         for (int c = 0; c < R; c++)
             movementArray[c] = -1;
+        //Set every character to the number of letters it's last occurance from the first pattern character
         for (int j = 0; j < pat.length(); j++)
             movementArray[pat.charAt(j)] = j;
     }
