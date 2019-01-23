@@ -20,5 +20,6 @@ public class BackwardsSearch {
     int getComparisonsForLastSearch() {
         return 0;
     }
-
 }
+
+
