@@ -28,16 +28,6 @@ public class BackwardsSearch {
         for (int j = 0; j < pat.length(); j++)
             right[pat.charAt(j)] = j;
     }
-
-
-
-
-
-
-
-
-
-
     int findLocation(String needle, String haystack) {
         return -1;
     }

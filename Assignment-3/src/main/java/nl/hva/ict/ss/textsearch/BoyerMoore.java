@@ -47,7 +47,7 @@ public class BoyerMoore {
 
     public static int searchComparisons;
     private final int R;     // the radix
-    private int[] right;     // the bad-character skip array
+    private int[] movementArray;     // the bad-character skip array
 
     private String pat;      // or as a string
     /**
@@ -62,11 +62,11 @@ public class BoyerMoore {
         this.pat = pat;
 
         // position of rightmost occurrence of c in the pattern
-        right = new int[R];
+        movementArray = new int[R];
         for (int c = 0; c < R; c++)
-            right[c] = -1;
+            movementArray[c] = -1;
         for (int j = 0; j < pat.length(); j++)
-            right[pat.charAt(j)] = j;
+            movementArray[pat.charAt(j)] = j;
     }
 
     /**
@@ -86,7 +86,7 @@ public class BoyerMoore {
             for (int j = m-1; j >= 0; j--) {
                 if (pat.charAt(j) != txt.charAt(i+j)) {
                     searchComparisons++;
-                    skip = Math.max(1, j - right[txt.charAt(i+j)]);
+                    skip = Math.max(1, j - movementArray[txt.charAt(i+j)]);
                     break;
                 }
             }
