@@ -95,11 +95,6 @@ public class BoyerMoore {
             System.out.println("letter " + pat.charAt(j) + " value = " + movementArray[pat.charAt(j)]);
             reverseCounter++;
         }
-//        for (int c = 0; c < R; c++) {
-//            if (movementArray[c] != -1) {
-//                System.out.println(movementArray[c]);
-//            }
-//        }
     }
 
     /**
