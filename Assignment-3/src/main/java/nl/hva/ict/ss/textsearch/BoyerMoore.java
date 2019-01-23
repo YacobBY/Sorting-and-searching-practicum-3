@@ -131,20 +131,22 @@ public class BoyerMoore {
      *         in the text string; n if no such match
      */
     public int search(String txt) {
-        int m = pat.length();
-        int n = txt.length();
-        int skip;
-        for (int i = 0; i <= n - m; i += skip) {
-            skip = 0;
-            for (int j = m - 1; j >= 0; j--) {
+        int patternLength = pat.length();
+        int textlength = txt.length();
+        int amountToSkip=0;
+        //Zolang I kleiner is dan de string - pattern length (als pattern niet uit de max string length gaat)
+        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
+            amountToSkip = 0;
+            //Reverse here
+            for (int j = patternLength - 1; j >= 0; j--) {
                 if (pat.charAt(j) != txt.charAt(i + j)) {
                     searchComparisons++;
-                    skip = Math.max(1, j - movementArray[txt.charAt(i + j)]);
+                    amountToSkip = Math.max(1, j - movementArray[txt.charAt(i + j)]);
                     break;
                 }
             }
-            if (skip == 0) return i;    // found
+            if (amountToSkip == 0) return i;    // found
         }
-        return n;                       // not found
+        return -1;                       // not found
     }
 }
