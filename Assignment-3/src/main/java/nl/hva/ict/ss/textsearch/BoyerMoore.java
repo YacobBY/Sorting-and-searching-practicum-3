@@ -44,18 +44,25 @@
 package nl.hva.ict.ss.textsearch;
 
 public class BoyerMoore {
+
+    public static int searchComparisons;
     private final int R;     // the radix
     private int[] right;     // the bad-character skip array
 
     private char[] pattern;  // store the pattern as a character array
     private String pat;      // or as a string
 
+
+
+
     /**
      * Preprocesses the pattern string.
      *
      * @param pat the pattern string
      */
+
     public BoyerMoore(String pat) {
+        searchComparisons = 0;
         this.R = 256;
         this.pat = pat;
 
@@ -101,8 +108,11 @@ public class BoyerMoore {
         int skip;
         for (int i = 0; i <= n - m; i += skip) {
             skip = 0;
+            searchComparisons++;
             for (int j = m-1; j >= 0; j--) {
+                searchComparisons++;
                 if (pat.charAt(j) != txt.charAt(i+j)) {
+                    searchComparisons++;
                     skip = Math.max(1, j - right[txt.charAt(i+j)]);
                     break;
                 }
@@ -126,9 +136,12 @@ public class BoyerMoore {
         int n = text.length;
         int skip;
         for (int i = 0; i <= n - m; i += skip) {
+            searchComparisons++;
             skip = 0;
             for (int j = m-1; j >= 0; j--) {
+                searchComparisons++;
                 if (pattern[j] != text[i+j]) {
+
                     skip = Math.max(1, j - right[text[i+j]]);
                     break;
                 }
@@ -138,7 +151,6 @@ public class BoyerMoore {
         return n;                       // not found
     }
 
-
     /**
      * Takes a pattern string and an input string as command-line arguments;
      * searches for the pattern string in the text string; and prints
@@ -147,8 +159,8 @@ public class BoyerMoore {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String pat = args[0];
-        String txt = args[1];
+        String pat = "lolxd";
+        String txt = "aaaaaaalolxd";
         char[] pattern = pat.toCharArray();
         char[] text    = txt.toCharArray();
 
@@ -169,5 +181,7 @@ public class BoyerMoore {
         for (int i = 0; i < offset2; i++)
             System.out.print(" ");
         System.out.println(pat);
+        System.out.println();
+        System.out.println(searchComparisons);
     }
 }
