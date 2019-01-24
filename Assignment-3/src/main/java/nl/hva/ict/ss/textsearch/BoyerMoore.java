@@ -16,8 +16,8 @@ public class BoyerMoore {
     }
 
     public static void main(String[] args) {
-        String pat = "lolxd";
-        String txt = "asdfasdaflolxd";
+        String pat = "needle";
+        String txt = "whereistheaaaneedleinthishaystack";
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
@@ -41,7 +41,7 @@ public class BoyerMoore {
             skip = 0;
 
             for (int j = pL - 1; j >= 0; j--) {
-                System.out.println("Needle: " + pat.charAt(j) + " Haystack: " + txt.charAt(i+j));
+                System.out.println("needle: " + pat.charAt(j) + " Haystack: " + txt.charAt(i+j));
                 System.out.println("Current index is: " + i + " pattern index is " + j);
                 if (pat.charAt(j) != txt.charAt(i + j)) {
                     skip = j - right[txt.charAt(i + j)];
