@@ -133,10 +133,13 @@ public class BoyerMoore {
     public int search(String txt) {
         int patternLength = pat.length();
         int textlength = txt.length();
-        int amountToSkip=0;
+        int amountToSkip;
         //Zolang I kleiner is dan de string - pattern length (als pattern niet uit de max string length gaat)
-        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
+        //i is de "begin index" van elke comparison
+//        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
+        for (int i = textlength - patternLength; i >= 0; i -= amountToSkip) {
             amountToSkip = 0;
+            searchComparisons++;
             //Reverse here
             for (int j = patternLength - 1; j >= 0; j--) {
                 if (pat.charAt(j) != txt.charAt(i + j)) {
