@@ -36,7 +36,7 @@ public class BoyerMoore
     }
     public static void main(String[] args){
         String pat = "lolxd";
-        String txt = "aaaaaaalolxdaaqwdasdqw";
+        String txt = "aaaasdasdaadaaaaalolxdaaqwdasdqw";
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
