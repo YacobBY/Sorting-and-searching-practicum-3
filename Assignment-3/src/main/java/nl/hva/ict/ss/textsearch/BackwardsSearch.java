@@ -50,15 +50,17 @@ public class BackwardsSearch {
             searchComparisons++;
             //Reverse here
             for (int patternIndex = patternLength - 1; patternIndex >= 0; patternIndex--) {
-                System.out.println("Needle letter is " + needle.charAt(patternIndex));
-                System.out.println("Haystack letter is " + haystack.charAt(textIndex ));
-                System.out.println("Current index is: "+ textIndex);
-                if (needle.charAt(patternIndex) != haystack.charAt(textIndex + patternIndex)) {
+                System.out.println("Needle letter is " + needle.charAt(patternIndex) + " Haystack letter is " + haystack.charAt(textIndex ));
+                System.out.println("Current index is: "+ textIndex + " pattern index is " + patternIndex);
+                if (needle.charAt(patternIndex) != haystack.charAt(textIndex )) {
 
                     searchComparisons++;
                     amountToSkip = Math.max(1, patternIndex - movementArray[haystack.charAt(textIndex + patternIndex)]);
                     System.out.println(needle.charAt(patternIndex) + " "+    haystack.charAt(textIndex + patternIndex) + " Amount to skip is: " + amountToSkip);
                     break;
+                }
+                else {
+                    System.out.println("match found");
                 }
             }
             if (amountToSkip == 0) return textIndex;    // found

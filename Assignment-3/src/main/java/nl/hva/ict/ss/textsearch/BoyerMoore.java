@@ -1,115 +1,46 @@
-/**
- * Compilation:  javac BoyerMoore.java
- * Execution:    java BoyerMoore pattern text
- * Dependencies: StdOut.java
- * <p>
- * Reads in two strings, the pattern and the input text, and
- * searches for the pattern in the input text using the
- * bad-character rule part of the Boyer-Moore algorithm.
- * (does not implement the strong good suffix rule)
- * <p>
- * % java BoyerMoore abracadabra abacadabrabracabracadabrabrabracad
- * text:    abacadabrabracabracadabrabrabracad
- * pattern:               abracadabra
- * <p>
- * % java BoyerMoore rab abacadabrabracabracadabrabrabracad
- * text:    abacadabrabracabracadabrabrabracad
- * pattern:         rab
- * <p>
- * % java BoyerMoore bcara abacadabrabracabracadabrabrabracad
- * text:    abacadabrabracabracadabrabrabracad
- * pattern:                                   bcara
- * <p>
- * % java BoyerMoore rabrabracad abacadabrabracabracadabrabrabracad
- * text:    abacadabrabracabracadabrabrabracad
- * pattern:                        rabrabracad
- * <p>
- * % java BoyerMoore abacad abacadabrabracabracadabrabrabracad
- * text:    abacadabrabracabracadabrabrabracad
- * pattern: abacad
- * <p>
- * <p>
- * The {@code BoyerMoore} class finds the first occurrence of a pattern string
- * in a text string.
- * <p>
- * This implementation uses the Boyer-Moore algorithm (with the bad-character
- * rule, but not the strong good suffix rule).
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- * <p>
- * The {@code BoyerMoore} class finds the first occurrence of a pattern string
- * in a text string.
- * <p>
- * This implementation uses the Boyer-Moore algorithm (with the bad-character
- * rule, but not the strong good suffix rule).
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- */
 
-/**
- *  The {@code BoyerMoore} class finds the first occurrence of a pattern string
- *  in a text string.
- *  <p>
- *  This implementation uses the Boyer-Moore algorithm (with the bad-character
- *  rule, but not the strong good suffix rule).
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- */
 package nl.hva.ict.ss.textsearch;
-
-public class BoyerMoore {
-
-    public static int searchComparisons;
-    private final int R;     // the radix
-    private int[] movementArray;     // the bad-character skip array
-    private String pat;      // or as a string
-
-    /**
-     * Preprocesses the pattern string.
-     *
-     * @param pat the pattern string
-     */
-
-    public BoyerMoore(String pat) {
-        searchComparisons = 0;
-        this.R = 256;
+public class BoyerMoore
+{
+    private int[] right;
+    private String pat;
+    BoyerMoore(String pat)
+    { // Compute skip table.
         this.pat = pat;
-
-        // position of rightmost occurrence of c in the pattern
-        movementArray = new int[R];
-        //Set every possible character to -1
-        for (int c = 0; c < R; c++) {
-            movementArray[c] = -1;
-        }
-        int reverseCounter = 0;
-        //Set every character to the number of letters it's last occurance from the first pattern character
-        for (int j = pat.length() - 1; j >= 0; j--) {
-            movementArray[pat.charAt(j)] = reverseCounter;
-            System.out.println("letter " + pat.charAt(j) + " value = " + movementArray[pat.charAt(j)]);
-            reverseCounter++;
-        }
+        int M = pat.length();
+        int R = 256;
+        right = new int[R];
+        for (int c = 0; c < R; c++)
+            right[c] = -1; // -1 for chars not in pattern
+        for (int j = 0; j < M; j++) // rightmost position for
+            right[pat.charAt(j)] = j; // chars in pattern
     }
-
-    /**
-     * Takes a pattern string and an input string as command-line arguments;
-     * searches for the pattern string in the text string; and prints
-     * the first occurrence of the pattern string in the text string.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
+    public int search(String txt)
+    { // Search for pattern in txt.
+        int N = txt.length();
+        int M = pat.length();
+        int skip;
+        for (int i = 0; i <= N-M; i += skip)
+        { // Does the pattern match the text at position i ?
+            skip = 0;
+            for (int j = M-1; j >= 0; j--)
+                if (pat.charAt(j) != txt.charAt(i+j))
+                {
+                    skip = j - right[txt.charAt(i+j)];
+                    if (skip < 1) skip = 1;
+                    break;
+                }
+            if (skip == 0) return i; // found.
+        }
+        return N; // not found.
+    }
+    public static void main(String[] args){
         String pat = "lolxd";
         String txt = "aaaaaaalolxdaaqwdasdqw";
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
-        int offset1 = boyermoore1.search(txt,pat);
+        int offset1 = boyermoore1.search(txt);
 
         // print results
         System.out.println("text:    " + txt);
@@ -118,37 +49,6 @@ public class BoyerMoore {
             System.out.print(" ");
         System.out.println(pat);
         System.out.println();
-        System.out.println(" Total comparisons: " + searchComparisons);
-    }
-
-    /**
-     * Returns the index of the first occurrrence of the pattern string
-     * in the text string.
-     *
-     * @param  txt the text string
-     * @return the index of the first occurrence of the pattern string
-     *         in the text string; n if no such match
-     */
-    public int search(String txt,String pattern) {
-        int patternLength = pattern.length();
-        int textlength = txt.length();
-        int amountToSkip;
-        //Zolang I kleiner is dan de string - pattern length (als pattern niet uit de max string length gaat)
-        //i is de "begin index" van elke comparison
-//        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
-        for (int i = textlength - patternLength; i >= 0; i -= amountToSkip) {
-            amountToSkip = 0;
-            searchComparisons++;
-            //Reverse here
-            for (int j = patternLength - 1; j >= 0; j--) {
-                if (pat.charAt(j) != txt.charAt(i + j)) {
-                    searchComparisons++;
-                    amountToSkip = Math.max(1, j - movementArray[txt.charAt(i + j)]);
-                    break;
-                }
-            }
-            if (amountToSkip == 0) return i;    // found
-        }
-        return -1;                       // not found
-    }
+//        System.out.println(" Total comparisons: " + searchComparisons);
+    }// See page 769.
 }
