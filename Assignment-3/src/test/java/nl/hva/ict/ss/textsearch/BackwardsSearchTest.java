@@ -15,7 +15,7 @@ public class BackwardsSearchTest {
 
     @Test
     public void findSingleOccurrence() {
-        int index = searchEngine.findLocation("needle", "whereistheaaaneedleinthishaystack");
+        int index = searchEngine.findLocation("needle", "whereistheneedleinthishaystack");
 
         assertEquals("whereisthe".length(), index);
     }

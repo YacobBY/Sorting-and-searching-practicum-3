@@ -26,12 +26,12 @@ public class BackwardsSearch {
         for (int c = 0; c < R; c++) {
             skipArr[c] = -1;
         }
-
+        int reverseCounter = 0;
         //Set every character to the number of letters it's last occurance from the first pattern character
         for (int j = pat.length() - 1; j >= 0; j--) {
-            skipArr[pat.charAt(j)] = j;
+            skipArr[pat.charAt(j)] = reverseCounter;
             System.out.println("letter " + pat.charAt(j) + " value = " + skipArr[pat.charAt(j)]);
-//            reverseCounter++;
+            reverseCounter++;
         }
     }
 
@@ -47,20 +47,19 @@ public class BackwardsSearch {
             amountToSkip = 0;
             searchComparisons++;
             //Reverse here
-//            for (int j = M-1; j >= 0; j--)
-            int reverseCounter = 0;
-            for (int patternIndex = patternLength - 1; patternIndex >= 0; patternIndex++) {
-                System.out.println("Needle letter is " + pattern.charAt(reverseCounter) + " Haystack letter is " + text.charAt(textIndex));
-                System.out.println("Current index is: " + textIndex + " pattern index is " + patternIndex);
-                if (pattern.charAt(reverseCounter) != text.charAt(textIndex+patternIndex)) {
-                    searchComparisons++;
+//
 
-                    amountToSkip =  patternIndex - skipArr[text.charAt(textIndex + patternIndex)];
+            for (int patternIndex = 0; patternIndex < patternLength; patternIndex++) {
+                System.out.println("Needle  " + pattern.charAt(patternIndex) + " Haystack   " + text.charAt(textIndex));
+                System.out.println("Text index: " + textIndex + " Pattern index " + patternIndex);
+                if (pattern.charAt(patternIndex) != text.charAt(textIndex+patternIndex)) {
+                    searchComparisons++;
+                    amountToSkip =  (patternLength-1) - skipArr[text.charAt(textIndex + patternIndex)];
                     if (amountToSkip < 1) amountToSkip = 1;
-                    System.out.println(pattern.charAt(patternIndex) + " " + text.charAt(textIndex + patternIndex) + " To skip is: " + amountToSkip);
+                    System.out.println("Skip amount: "+ amountToSkip );
                     break;
                 } else {
-                    System.out.println("match found");
+                    System.out.println("MATCH FOUND--------");
 
                 }
             }
