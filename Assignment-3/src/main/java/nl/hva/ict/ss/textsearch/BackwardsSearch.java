@@ -13,13 +13,13 @@ public class BackwardsSearch {
     public static int searchComparisons;
     private final int R;     // the radix
     private int[] movementArray;     // the bad-character skip array
-    private String pat;      // or as a string
+
 
 
     public BackwardsSearch(String pat) {
         searchComparisons = 0;
         this.R = 256;
-        this.pat = pat;
+
 
         // position of rightmost occurrence of c in the pattern
         movementArray = new int[R];
@@ -39,9 +39,9 @@ public class BackwardsSearch {
 
 
     int findLocation(String needle, String haystack) {
-        int patternLength = needle.length();
         int textlength = haystack.length();
-        int amountToSkip;
+        int patternLength = needle.length();
+        int amountToSkip = 0;
         //Zolang I kleiner is dan de string - needle length (als needle niet uit de max string length gaat)
         //i is de "begin index" van elke comparison
 //        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
@@ -50,9 +50,14 @@ public class BackwardsSearch {
             searchComparisons++;
             //Reverse here
             for (int patternIndex = patternLength - 1; patternIndex >= 0; patternIndex--) {
+                System.out.println("Needle letter is " + needle.charAt(patternIndex));
+                System.out.println("Haystack letter is " + haystack.charAt(textIndex ));
+                System.out.println("Current index is: "+ textIndex);
                 if (needle.charAt(patternIndex) != haystack.charAt(textIndex + patternIndex)) {
+
                     searchComparisons++;
                     amountToSkip = Math.max(1, patternIndex - movementArray[haystack.charAt(textIndex + patternIndex)]);
+                    System.out.println(needle.charAt(patternIndex) + " "+    haystack.charAt(textIndex + patternIndex) + " Amount to skip is: " + amountToSkip);
                     break;
                 }
             }

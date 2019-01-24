@@ -105,7 +105,7 @@ public class BoyerMoore {
      */
     public static void main(String[] args) {
         String pat = "lolxd";
-        String txt = "aaaaaaalolxd";
+        String txt = "aaaaaaalolxdaaqwdasdqw";
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
