@@ -20,7 +20,6 @@ public class BackwardsSearch {
         searchComparisons = 0;
         this.R = 256;
 
-
         // position of rightmost occurrence of c in the pattern
         movementArray = new int[R];
         //Set every possible character to -1
@@ -61,6 +60,7 @@ public class BackwardsSearch {
                 }
                 else {
                     System.out.println("match found");
+
                 }
             }
             if (amountToSkip == 0) return textIndex;    // found

@@ -17,13 +17,13 @@ public class BoyerMoore
     }
     public int search(String txt)
     { // Search for pattern in txt.
-        int N = txt.length();
-        int M = pat.length();
+        int tL = txt.length();
+        int pL = pat.length();
         int skip;
-        for (int i = 0; i <= N-M; i += skip)
+        for (int i = 0; i <= tL-pL; i += skip)
         { // Does the pattern match the text at position i ?
             skip = 0;
-            for (int j = M-1; j >= 0; j--)
+            for (int j = pL-1; j >= 0; j--)
                 if (pat.charAt(j) != txt.charAt(i+j))
                 {
                     skip = j - right[txt.charAt(i+j)];
@@ -32,7 +32,7 @@ public class BoyerMoore
                 }
             if (skip == 0) return i; // found.
         }
-        return N; // not found.
+        return tL; // not found.
     }
     public static void main(String[] args){
         String pat = "lolxd";
