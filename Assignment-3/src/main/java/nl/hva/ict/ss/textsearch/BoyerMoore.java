@@ -68,7 +68,6 @@ public class BoyerMoore {
     public static int searchComparisons;
     private final int R;     // the radix
     private int[] movementArray;     // the bad-character skip array
-
     private String pat;      // or as a string
 
     /**
@@ -110,7 +109,7 @@ public class BoyerMoore {
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
-        int offset1 = boyermoore1.search(txt);
+        int offset1 = boyermoore1.search(txt,pat);
 
         // print results
         System.out.println("text:    " + txt);
@@ -130,8 +129,8 @@ public class BoyerMoore {
      * @return the index of the first occurrence of the pattern string
      *         in the text string; n if no such match
      */
-    public int search(String txt) {
-        int patternLength = pat.length();
+    public int search(String txt,String pattern) {
+        int patternLength = pattern.length();
         int textlength = txt.length();
         int amountToSkip;
         //Zolang I kleiner is dan de string - pattern length (als pattern niet uit de max string length gaat)

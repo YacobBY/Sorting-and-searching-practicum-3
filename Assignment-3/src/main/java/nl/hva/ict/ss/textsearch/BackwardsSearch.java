@@ -10,26 +10,55 @@ public class BackwardsSearch {
      * character of the <code>needle</code>.
      */
 
+    public static int searchComparisons;
     private final int R;     // the radix
-    private int[] right;     // the bad-character skip array
-
-    private char[] pattern;  // store the pattern as a character array
+    private int[] movementArray;     // the bad-character skip array
     private String pat;      // or as a string
-    private int searchComparisons = 0;
-    public BackwardsSearch(String pat) {
 
+
+    public BackwardsSearch(String pat) {
+        searchComparisons = 0;
         this.R = 256;
         this.pat = pat;
 
         // position of rightmost occurrence of c in the pattern
-        right = new int[R];
-        for (int c = 0; c < R; c++)
-            right[c] = -1;
-        for (int j = 0; j < pat.length(); j++)
-            right[pat.charAt(j)] = j;
+        movementArray = new int[R];
+        //Set every possible character to -1
+        for (int c = 0; c < R; c++) {
+            movementArray[c] = -1;
+        }
+        int reverseCounter = 0;
+        //Set every character to the number of letters it's last occurance from the first pattern character
+        for (int j = pat.length() - 1; j >= 0; j--) {
+            movementArray[pat.charAt(j)] = reverseCounter;
+            System.out.println("letter " + pat.charAt(j) + " value = " + movementArray[pat.charAt(j)]);
+            reverseCounter++;
+        }
     }
+
+
+
     int findLocation(String needle, String haystack) {
-        return -1;
+        int patternLength = needle.length();
+        int textlength = haystack.length();
+        int amountToSkip;
+        //Zolang I kleiner is dan de string - needle length (als needle niet uit de max string length gaat)
+        //i is de "begin index" van elke comparison
+//        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
+        for (int textIndex = textlength - patternLength; textIndex >= 0; textIndex -= amountToSkip) {
+            amountToSkip = 0;
+            searchComparisons++;
+            //Reverse here
+            for (int patternIndex = patternLength - 1; patternIndex >= 0; patternIndex--) {
+                if (needle.charAt(patternIndex) != haystack.charAt(textIndex + patternIndex)) {
+                    searchComparisons++;
+                    amountToSkip = Math.max(1, patternIndex - movementArray[haystack.charAt(textIndex + patternIndex)]);
+                    break;
+                }
+            }
+            if (amountToSkip == 0) return textIndex;    // found
+        }
+        return -1;                       // not found
     }
 
     /**

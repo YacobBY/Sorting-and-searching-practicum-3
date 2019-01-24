@@ -10,7 +10,7 @@ public class BackwardsSearchTest {
 
     @Before
     public void setup() {
-        searchEngine = new BackwardsSearch("aaa");
+        searchEngine = new BackwardsSearch("needle");
     }
 
     @Test
@@ -19,7 +19,8 @@ public class BackwardsSearchTest {
 
         assertEquals("whereisthe".length(), index);
     }
-
+    //needle
+    //"whereistheneedleinthishaystack");
     @Test
     public void cantFindOccurrence() {
         int index = searchEngine.findLocation("needle", "thereisnothinginthishaystack");
