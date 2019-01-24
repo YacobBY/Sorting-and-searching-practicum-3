@@ -1,11 +1,10 @@
-
 package nl.hva.ict.ss.textsearch;
-public class BoyerMoore
-{
+
+public class BoyerMoore {
     private int[] right;
     private String pat;
-    BoyerMoore(String pat)
-    { // Compute skip table.
+
+    BoyerMoore(String pat) { // Compute skip table.
         this.pat = pat;
         int M = pat.length();
         int R = 256;
@@ -15,28 +14,10 @@ public class BoyerMoore
         for (int j = 0; j < M; j++) // rightmost position for
             right[pat.charAt(j)] = j; // chars in pattern
     }
-    public int search(String txt)
-    { // Search for pattern in txt.
-        int tL = txt.length();
-        int pL = pat.length();
-        int skip;
-        for (int i = 0; i <= tL-pL; i += skip)
-        { // Does the pattern match the text at position i ?
-            skip = 0;
-            for (int j = pL-1; j >= 0; j--)
-                if (pat.charAt(j) != txt.charAt(i+j))
-                {
-                    skip = j - right[txt.charAt(i+j)];
-                    if (skip < 1) skip = 1;
-                    break;
-                }
-            if (skip == 0) return i; // found.
-        }
-        return tL; // not found.
-    }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         String pat = "lolxd";
-        String txt = "aaaasdasdaadaaaaalolxdaaqwdasdqw";
+        String txt = "asdfasdaflolxd";
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
 
@@ -51,4 +32,29 @@ public class BoyerMoore
         System.out.println();
 //        System.out.println(" Total comparisons: " + searchComparisons);
     }// See page 769.
+
+    public int search(String txt) { // Search for pattern in txt.
+        int tL = txt.length();
+        int pL = pat.length();
+        int skip;
+        for (int i = 0; i <= tL - pL; i += skip) { // Does the pattern match the text at position i ?
+            skip = 0;
+
+            for (int j = pL - 1; j >= 0; j--) {
+                System.out.println("Needle: " + pat.charAt(j) + " Haystack: " + txt.charAt(i+j));
+                System.out.println("Current index is: " + i + " pattern index is " + j);
+                if (pat.charAt(j) != txt.charAt(i + j)) {
+                    skip = j - right[txt.charAt(i + j)];
+                    if (skip < 1) skip = 1;
+                    System.out.println("Skip amount is: "+ skip );
+                    break;
+                }
+                else {
+                    System.out.println(j);
+                }
+            }
+            if (skip == 0) return i; // found.
+        }
+        return tL; // not found.
+    }
 }

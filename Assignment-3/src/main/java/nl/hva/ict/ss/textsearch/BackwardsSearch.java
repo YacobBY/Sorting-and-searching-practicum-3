@@ -37,23 +37,25 @@ public class BackwardsSearch {
 
 
     int findLocation(String needle, String haystack) {
-        int textlength = haystack.length();
-        int patternLength = needle.length();
+        String pattern = needle;
+        String text = haystack;
+        int textlength = text.length();
+        int patternLength = pattern.length();
         int amountToSkip = 0;
-        //Zolang I kleiner is dan de string - needle length (als needle niet uit de max string length gaat)
-        //i is de "begin index" van elke comparison
-//        for (int i = 0; i <= textlength - patternLength; i += amountToSkip) {
+        //Begin aan het einde ipv begin                                    Amount to skip is subtracted ipv added
         for (int textIndex = textlength - patternLength; textIndex >= 0; textIndex -= amountToSkip) {
             amountToSkip = 0;
             searchComparisons++;
             //Reverse here
-            for (int patternIndex = patternLength - 1; patternIndex >= 0; patternIndex--) {
-                System.out.println("Needle letter is " + needle.charAt(patternIndex) + " Haystack letter is " + haystack.charAt(textIndex));
+//            for (int j = M-1; j >= 0; j--)
+            for (int patternIndex = 0; patternIndex <= patternLength - 1; patternIndex++) {
+                System.out.println("Needle letter is " + pattern.charAt(patternIndex) + " Haystack letter is " + text.charAt(textIndex));
                 System.out.println("Current index is: " + textIndex + " pattern index is " + patternIndex);
-                if (needle.charAt(patternIndex) != haystack.charAt(textIndex)) {
+                if (pattern.charAt(patternIndex) != text.charAt(textIndex+patternIndex)) {
                     searchComparisons++;
-                    amountToSkip = Math.max(1, patternIndex - skipArr[haystack.charAt(textIndex + patternIndex)]);
-                    System.out.println(needle.charAt(patternIndex) + " " + haystack.charAt(textIndex + patternIndex) + " To skip is: " + amountToSkip);
+
+                    amountToSkip = Math.max(1, patternLength - skipArr[text.charAt(textIndex + patternIndex)]);
+                    System.out.println(pattern.charAt(patternIndex) + " " + text.charAt(textIndex + patternIndex) + " To skip is: " + amountToSkip);
                     break;
                 } else {
                     System.out.println("match found");
