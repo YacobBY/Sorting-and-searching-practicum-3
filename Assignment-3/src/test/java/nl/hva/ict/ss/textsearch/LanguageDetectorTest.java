@@ -1,6 +1,7 @@
 package nl.hva.ict.ss.textsearch;
 
 import org.junit.Before;
+import org.junit.Test;
 
 public class LanguageDetectorTest {
     private LanguageDetector detector;
@@ -11,4 +12,8 @@ public class LanguageDetectorTest {
     }
 
     // Add your tests here. They are allowed to NOT use assertXxxx... :-)
+    @Test
+    public void docsPrint (){
+        System.out.println("xd");
+    }
 }

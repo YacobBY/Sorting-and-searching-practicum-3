@@ -1,5 +1,8 @@
 package nl.hva.ict.ss.textsearch;
-
+/*Yacob commentary:
+Booyer moore original is van Sedgewick and Wayne page 772 en 769:
+ALGORITHM 5.7 Boyer-Moore substring search (mismatched character heuristic
+*/
 public class BackwardsSearch {
     /**
      * Returns index of the right most location where <code>needle</code> occurs within <code>haystack</code>. Searching
