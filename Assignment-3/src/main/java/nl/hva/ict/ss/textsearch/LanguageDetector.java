@@ -14,17 +14,19 @@ public class LanguageDetector {
         sc.useDelimiter("\\*/"); // EOF marker
         System.out.println(sc.next());
 
-
         System.out.println("-------------------------------------------------------------------------------------------------ASASAS");
 
-        //Dit geeft volgende code stuk
+        //Dit geeft code tot begin comments
         sc.useDelimiter("/\\*"); // EOF marker
+
         System.out.println(sc.next());
 
-
+        //dit zoekt alles tot het einde van de comments
         sc.useDelimiter("\\*/"); // EOF marker
         System.out.println(sc.next());
     }
+
+
 //    public String docsPrint (){
 //
 //       return content;

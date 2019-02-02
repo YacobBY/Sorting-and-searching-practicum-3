@@ -1,0 +1,15 @@
+int i = 1
+
+while scanner hasnext
+
+case  i=1 {
+scan until you find comments
+add everything up till commentary to code string
+i=0
+}
+
+case i=0{
+scan everything until you find code
+add part up till code begin to comment string
+}
+
