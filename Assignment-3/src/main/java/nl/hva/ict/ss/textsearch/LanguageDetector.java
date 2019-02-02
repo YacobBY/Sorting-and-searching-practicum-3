@@ -8,24 +8,31 @@ public class LanguageDetector {
 
     public LanguageDetector(InputStream input) {
         Scanner sc = new Scanner(input);
-        String docs;
-        String code;
-        //Dit geeft volgende docs stuk
-        sc.useDelimiter("\\*/"); // EOF marker
-        System.out.println(sc.next());
 
-        System.out.println("-------------------------------------------------------------------------------------------------ASASAS");
+        StringBuilder docs = new StringBuilder();
+        StringBuilder code = new StringBuilder();
+        String niks;
 
         //Dit geeft code tot begin comments
         sc.useDelimiter("/\\*"); // EOF marker
+         niks= sc.next();
+//        System.out.println("aaaa");
+//        System.out.println(sc.next());
 
-        System.out.println(sc.next());
-
-        //dit zoekt alles tot het einde van de comments
+        //Dit geeft tot eind comments
         sc.useDelimiter("\\*/"); // EOF marker
-        System.out.println(sc.next());
-    }
+//        System.out.println(sc.next());
+        docs.append(sc.next());
 
+        System.out.println(docs);
+
+    }
+        public String addComments(String input){
+            Scanner sc = new Scanner(input);
+            sc.useDelimiter("\\*/"); // EOF marker
+
+       return  sc.next();
+        }
 
 //    public String docsPrint (){
 //
@@ -33,7 +40,6 @@ public class LanguageDetector {
 //    }
 
 //    public String findNextDocs(String docs)
-
 
 
 }
