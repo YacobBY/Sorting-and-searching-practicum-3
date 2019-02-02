@@ -6,16 +6,16 @@ public class TestClassYacob {
 
     public static void main(String[] args) {
 
-        String str  = " wwwwww/*asdadadadsadasd*/zzzzzzzz    /*asdadadadsadasd*/";
+        String str  = "wwwwww/*asdadadadsa\ndasd ****/zzzzzzzz    /*asdadadadsadasd*/";
         
-        Pattern commentFinder = Pattern.compile("/\\*[a-z]*\\*/" );
+        Pattern commentFinder = Pattern.compile("/\\*[a-z$&+,:;=?@#|'<>.^*()%!-]*\\*/" );
         Matcher matchPhone = commentFinder.matcher(str);
 
         while (matchPhone.find()) {
             System.out.println(matchPhone.group());
             System.out.println(matchPhone.replaceAll("aaa"));
 
-
+            Pattern reDate = Pattern.compile("([0-9]{1,2}/) ([0-9]{1,2}/) ([0-9]{4})", Pattern.MULTILINE | Pattern.COMMENTS);
 
         }
     }
