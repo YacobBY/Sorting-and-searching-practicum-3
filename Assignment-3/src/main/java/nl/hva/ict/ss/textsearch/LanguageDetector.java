@@ -4,42 +4,36 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class LanguageDetector {
-    private String content; // Once an instance is created this will hold the complete content of the file.
+
+    public StringBuilder docs = new StringBuilder();
 
     public LanguageDetector(InputStream input) {
+        docs.append("");
         Scanner sc = new Scanner(input);
 
         StringBuilder docs = new StringBuilder();
         StringBuilder code = new StringBuilder();
-        String niks;
+
 
         //Dit geeft code tot begin comments
-        sc.useDelimiter("/\\*"); // EOF marker
-         niks= sc.next();
-//        System.out.println("aaaa");
-//        System.out.println(sc.next());
+        addComments(input);
+////        addComments(input);
+////        System.out.println(docs);
 
         //Dit geeft tot eind comments
-        sc.useDelimiter("\\*/"); // EOF marker
-//        System.out.println(sc.next());
-        docs.append(sc.next());
+//        sc.useDelimiter("\\*/"); // EOF marker
+////        System.out.println(sc.next());
+//        docs.append(sc.next());
 
         System.out.println(docs);
 
     }
-        public String addComments(String input){
+        public void addComments(InputStream input){
             Scanner sc = new Scanner(input);
             sc.useDelimiter("\\*/"); // EOF marker
-
-       return  sc.next();
+            docs.append(sc.next());
         }
-
-//    public String docsPrint (){
-//
-//       return content;
-//    }
-
-//    public String findNextDocs(String docs)
-
-
 }
+
+
+
