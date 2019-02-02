@@ -14,15 +14,17 @@ public class LanguageDetector {
         sc.useDelimiter("78"); // EOF marker
         docs.append(sc.next());
 
-        String str  = "wwwwww/*asdadadadsa\ndasd ****/zzzzzzzz    /****asdadadadsadasd*/";
+        String str  = docs.toString();
 
-        Pattern commentFinder = Pattern.compile("/\\*[a-z$&+,:;=?@#|'<>.^*()%!\\w\\d\\s\\t\\n\\r-]*\\*/" );
-        Matcher matchPhone = commentFinder.matcher(str);
+        str.toLowerCase();
 
-        while (matchPhone.find()) {
-            System.out.println(matchPhone.group());
+        Pattern commentFinder = Pattern.compile("/\\*[a-zA-Z0-9$&+,:;=?@#|'<>\\{}.\"^*()%!\\w\\d\\s\\t\\n\\r\\-]*\\*/" );
+        Matcher matcher = commentFinder.matcher(str);
+
+        while (matcher.find()) {
+            System.out.println(matcher.group());
             System.out.println("--------------------------------------");
-         
+
 
         }
     }
