@@ -6,15 +6,16 @@ public class TestClassYacob {
 
     public static void main(String[] args) {
 
-        String str  = " wwwwww/*asdadadadsadasd*/zzzzzzzz";
-
+        String str  = " wwwwww/*asdadadadsadasd*/zzzzzzzz    /*asdadadadsadasd*/";
+        
         Pattern commentFinder = Pattern.compile("/\\*[a-z]*\\*/" );
-        Pattern codeFinder = Pattern.compile("(.*(/\\*[a-z]*\\*/))");
         Matcher matchPhone = commentFinder.matcher(str);
 
         while (matchPhone.find()) {
-
             System.out.println(matchPhone.group());
+            System.out.println(matchPhone.replaceAll("aaa"));
+
+
 
         }
     }
