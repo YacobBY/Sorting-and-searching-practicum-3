@@ -6,14 +6,14 @@ public class TestClassYacob {
 
     public static void main(String[] args) {
 
-        String str  = " .............???!!!2222   java 7  is good!     Java 8 is better.     Java 9 is the best?";
+        String str  = " asdasdas /*asdadadadsadasd*/ saasdadada";
 
-        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)      [^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
-        Matcher matchSentence = re.matcher(str);
+        Pattern rePhone = Pattern.compile("/\\*[a-z]*\\*/" );
+        Matcher matchPhone = rePhone.matcher(str);
 
-        while (matchSentence.find()) {
-            System.out.println(matchSentence.group());
+        while (matchPhone.find()) {
+
+            System.out.println(matchPhone.group());
         }
-
     }
 }

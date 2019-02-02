@@ -26,7 +26,7 @@ public class LanguageDetector {
 //        docs.append(sc.next());
 
         System.out.println(docs);
-
+//  [^.!?\s][^.!?]*(?:[.!?](?!['"]?\s|$)[^.!?]*)\\*\/
     }
         public void addComments(InputStream input){
             Scanner sc = new Scanner(input);
