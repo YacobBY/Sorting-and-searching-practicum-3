@@ -42,6 +42,10 @@ public class LanguageDetector {
     public void methodCounter(){
 //public|private|protected|static|final|native|synchronized|abstract|transient|if|while|for
 //remove alle zinnen met public|static|void|if|for|while TOT het  eerste "(" teken in die zin
+        //(while|for|do|if|public|static|private|protected)
+        //   (while|for|do|if|public|static|private|protected)(.*?)(\)|;)   (converteer dit nog wel ff naar java)
+        Pattern nontMethodCall = Pattern.compile("(?s)/\\*(.)*?\\*/", Pattern.MULTILINE | Pattern.COMMENTS);
+
 
     }
 
