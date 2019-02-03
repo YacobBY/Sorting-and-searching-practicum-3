@@ -15,15 +15,16 @@ public class LanguageDetector {
         docs.append(sc.next());
 
         String str  = docs.toString();
-
         str.toLowerCase();
 
-        Pattern commentFinder = Pattern.compile("/\\*[a-zA-Z0-9$&+,:;=?@#|'<>\\{}.\"^*()%!\\w\\d\\s\\t\\n\\r\\-]*\\*/" );
+        //ONLINE TEST REGEX: \/\*.+?(?=\*\/)
+
+        Pattern commentFinder = Pattern.compile("(?s)/\\*(.)*?\\*/",Pattern.MULTILINE | Pattern.COMMENTS );
         Matcher matcher = commentFinder.matcher(str);
 
         while (matcher.find()) {
             System.out.println(matcher.group());
-            System.out.println("--------------------------------------");
+//            System.out.println("--------------------------------------");
 
 
         }
