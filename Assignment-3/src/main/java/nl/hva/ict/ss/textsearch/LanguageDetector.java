@@ -10,29 +10,25 @@ public class LanguageDetector {
 
     public LanguageDetector(InputStream input) {
         Scanner sc = new Scanner(input);
-        StringBuilder docs = new StringBuilder();
-        sc.useDelimiter("78"); // EOF marker
-        docs.append(sc.next());
+        StringBuilder fullCode = new StringBuilder();
+        sc.useDelimiter("\\A"); // EOF marker
+        fullCode.append(sc.next());
+        String str  = fullCode.toString().toLowerCase();
 
-        String str  = docs.toString();
-        str.toLowerCase();
-
+        String docs = "";
+        String code = "";
         //ONLINE TEST REGEX: \/\*.+?(?=\*\/)
 
         Pattern commentFinder = Pattern.compile("(?s)/\\*(.)*?\\*/",Pattern.MULTILINE | Pattern.COMMENTS );
         Matcher matcher = commentFinder.matcher(str);
 
         while (matcher.find()) {
-            System.out.println(matcher.group());
-//            System.out.println("--------------------------------------");
-
-
+           fullCode.append(matcher.group());
         }
+        System.out.println(fullCode);
+
     }
-//    Pattern reDate = Pattern.compile("([0-9]{1,2}/) ([0-9]{1,2}/) ([0-9]{4})", Pattern.MULTILINE | Pattern.COMMENTS);
-//String str  = docs.toString();
-//    String text = str.replace("\n", "").replace("\r", "");
-//        System.out.println(text);
+
 }
 
 
