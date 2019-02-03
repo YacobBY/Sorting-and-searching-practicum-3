@@ -147,7 +147,7 @@ public class Huffman {
             return;
         }
         BinaryStdOut.write(false);
-        writeTrie(x.left);
+        writeTrie     (x.left);
         writeTrie(x.right);
     }
 

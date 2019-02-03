@@ -2,6 +2,7 @@ package nl.hva.ict.ss.textsearch;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +18,8 @@ public class LanguageDetector {
         sc.useDelimiter("\\Z"); // EOF marker
         content = (sc.next());
         separateDocsFromCode();
-        methodCounter();
+        removeNonMethodCalls();
+        findMethodCalls();
 //        alphabetCounter();
 
     }
@@ -40,8 +42,7 @@ public class LanguageDetector {
 //        System.out.println(code);
     }
 
-    public void methodCounter() {
-
+    public void removeNonMethodCalls() {
         Pattern removeNonFunctionCalls = Pattern.compile("(while|switch|for|if|public|static|private|protected|void)(.*?)((\\()|(\\{))", Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher letterMatcher = removeNonFunctionCalls.matcher(code);
 //        System.out.println(code);
@@ -50,6 +51,13 @@ public class LanguageDetector {
             System.out.println(code);
         }
     }
+    public void findMethodCalls() {
+        ArrayList <String> methodCalls = new ArrayList<>();
+
+
+    }
+
+
 
 
     public void alphabetCounter() {
