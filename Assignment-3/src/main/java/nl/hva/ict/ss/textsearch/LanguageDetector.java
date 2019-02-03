@@ -58,7 +58,6 @@ public class LanguageDetector {
         Matcher functionCallMatcher = getFunctionCalls.matcher(code);
         while (functionCallMatcher.find()) {
             methodCalls.add(functionCallMatcher.group());
-
         }
         for (String method : methodCalls){
             System.out.println(method);
