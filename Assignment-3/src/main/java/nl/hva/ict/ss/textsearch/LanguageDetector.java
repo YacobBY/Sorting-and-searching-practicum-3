@@ -43,29 +43,58 @@ public class LanguageDetector {
     }
 
     public void removeNonMethodCalls() {
-        Pattern removeNonFunctionCalls = Pattern.compile("(while|switch|for|if|public|static|private|protected|void)(.*?)((\\()|(\\{))", Pattern.MULTILINE | Pattern.COMMENTS);
 
+        
+
+        Pattern removeNonFunctionCalls = Pattern.compile("(while|switch|for|if|public|static|private|protected|void)(.*?)((\\()|(\\{))", Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher letterMatcher = removeNonFunctionCalls.matcher(code);
 //        System.out.println(code);
         while (letterMatcher.find()) {
             code = letterMatcher.replaceAll("");
         }
         System.out.println(code);
+
+
     }
     public void findMethodCalls() {
         ArrayList <String> methodCalls = new ArrayList<>();
-        Pattern getFunctionCalls = Pattern.compile("(([a-z0-9<>\\.\\[\\]])*?)\\s*(\\()(([a-z0-9<>\\-\\.\\,\\+\\/\\[\\\\\\]()\\s\"\'])*)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
+        Pattern getFunctionCalls = Pattern.compile("(([a-z0-9<>\\.\\[\\]])+?)\\s*(\\()(([a-z0-9<>\\-\\.\\,\\+\\/\\[\\\\\\]()\\s\"\'])*)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher functionCallMatcher = getFunctionCalls.matcher(code);
         while (functionCallMatcher.find()) {
             methodCalls.add(functionCallMatcher.group());
         }
+        StringBuilder methodsFound = new StringBuilder();
         for (String method : methodCalls){
             System.out.println(method);
+            methodsFound.append(method+"\n");
+        }
+        String allMethods = methodsFound.toString();
+//        System.out.println("ALLMETHODS");
+//        System.out.println(allMethods); (([a-z0-9<>\.\[\]])*?)\s*(\()
+
+        System.out.println("aaa");
+        System.out.println(allMethods);
+        Pattern getInnerFunctions = Pattern.compile("(\\(([a-z0-9<>\\-\\.\\,\\+\\/\\s\\[\\\\\\]()\"'])*?)\\s*(\\()(([a-z0-9<>\\-\\.\\,\\+\\/\\s*\\[\\\\\\]()\"'])*?)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
+        Matcher innerFunctionMatcher = getInnerFunctions.matcher(code);
+        ArrayList <String> secondCalls = new ArrayList<>();
+        System.out.println("------------------------------------");
+
+        while (innerFunctionMatcher.find()) {
+            String test = innerFunctionMatcher.group();
+            Matcher getFunc = getFunctionCalls.matcher(test);
+            while (getFunc.find()) {
+
+                secondCalls.add(getFunc.group());
+            }
+
+        }
+        for (String secondCall : secondCalls){
+            System.out.println(secondCall);
+
         }
 
+
     }
-
-
 
 
     public void alphabetCounter() {
