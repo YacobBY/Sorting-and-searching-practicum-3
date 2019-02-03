@@ -54,7 +54,7 @@ public class LanguageDetector {
     }
     public void findMethodCalls() {
         ArrayList <String> methodCalls = new ArrayList<>();
-        Pattern getFunctionCalls = Pattern.compile("(([a-z<>\\.\\[\\]])*?)\\s*(\\()(.*)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
+        Pattern getFunctionCalls = Pattern.compile("(([a-z0-9<>\\.\\[\\]])*?)\\s*(\\()(.*)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher functionCallMatcher = getFunctionCalls.matcher(code);
         while (functionCallMatcher.find()) {
             methodCalls.add(functionCallMatcher.group());
