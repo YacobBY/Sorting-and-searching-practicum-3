@@ -13,7 +13,7 @@ public class TestClassYacob {
 
         while (matchPhone.find()) {
             System.out.println(matchPhone.group());
-            System.out.println(matchPhone.replaceAll("aaa"));
+            System.out.println(matchPhone.replaceAll("asdadasd"));
 
             Pattern reDate = Pattern.compile("([0-9]{1,2}/) ([0-9]{1,2}/) ([0-9]{4})", Pattern.MULTILINE | Pattern.COMMENTS);
 
