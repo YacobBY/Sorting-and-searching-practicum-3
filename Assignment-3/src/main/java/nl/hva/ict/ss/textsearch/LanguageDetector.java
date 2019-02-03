@@ -17,6 +17,7 @@ public class LanguageDetector {
         sc.useDelimiter("\\Z"); // EOF marker
         content = (sc.next());
         separateDocsFromCode();
+        methodCounter();
 //        alphabetCounter();
 
     }
@@ -39,20 +40,16 @@ public class LanguageDetector {
 //        System.out.println(code);
     }
 
-    public void methodCounter(){
-//public|private|protected|static|final|native|synchronized|abstract|transient|if|while|for
-//remove alle zinnen met public|static|void|if|for|while TOT het  eerste "(" teken in die zin
-        //(while|for|do|if|public|static|private|protected)
-        //   (while|for|do|if|public|static|private|protected)(.*?)(\()(.*?)(\(|;)   (converteer dit nog wel ff naar java)
-        Pattern nontMethodCall = Pattern.compile("(?s)/\\*(.)*?\\*/", Pattern.MULTILINE | Pattern.COMMENTS);
+    public void methodCounter() {
 
-
+        Pattern removeNonFunctionCalls = Pattern.compile("(while|switch|for|if|public|static|private|protected|void)(.*?)((\\()|(\\{))", Pattern.MULTILINE | Pattern.COMMENTS);
+        Matcher letterMatcher = removeNonFunctionCalls.matcher(code);
+//        System.out.println(code);
+        while (letterMatcher.find()) {
+            code = letterMatcher.replaceAll("");
+            System.out.println(code);
+        }
     }
-
-
-
-
-
 
 
     public void alphabetCounter() {
