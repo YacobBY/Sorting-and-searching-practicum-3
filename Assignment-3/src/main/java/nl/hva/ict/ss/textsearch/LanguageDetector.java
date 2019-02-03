@@ -38,6 +38,7 @@ public class LanguageDetector {
     }
 
     public void alphabetCounter() {
+        //Makes array with 123 slots, only 97 to 122 will be used
         letterCount = new int[123];
         for (int i = 0; i < 123; i++) {
             letterCount[i] = 0; // -1 for chars not in pattern
