@@ -13,12 +13,13 @@ BinaryStdOut.write(true)
 throw new IllegalStateException("Illegal state")
 
 BinaryStdOut.close()
+MinPQ<Node>()
 pq.insert(new Node(i, freq[i], null, null))
 pq.size()
 pq.insert(new Node('\0', 0, null, null))
 pq.insert(new Node('\1', 0, null, null))
 
-pq.size()
+pq.size()  ----------------------------------------------------dit wordt aangegeven als pq.size()>1)
 pq.delMin()
 pq.delMin()
 new Node('\0', left.freq + right.freq, left, right)
@@ -45,13 +46,14 @@ BinaryStdOut.close()
 
 BinaryStdIn.readBoolean()
 Node(BinaryStdIn.readChar(), -1, null, null)
-Node('\0', -1, readTrie(), readTrie())
+Node('\0', -1, readTrie(), readTrie()) -----------------------er wordt maar 1 van deze 2 readTrie's opgepakt/
 
 args[0].equals("-")
 compress()
 args[0].equals("+")
 expand()
 throw new IllegalArgumentException("Illegal command line argument")
+Node(char ch, int freq, Node left, Node right)
 
 
 
