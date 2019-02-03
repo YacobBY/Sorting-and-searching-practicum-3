@@ -44,16 +44,25 @@ public class LanguageDetector {
 
     public void removeNonMethodCalls() {
         Pattern removeNonFunctionCalls = Pattern.compile("(while|switch|for|if|public|static|private|protected|void)(.*?)((\\()|(\\{))", Pattern.MULTILINE | Pattern.COMMENTS);
+
         Matcher letterMatcher = removeNonFunctionCalls.matcher(code);
 //        System.out.println(code);
         while (letterMatcher.find()) {
             code = letterMatcher.replaceAll("");
-            System.out.println(code);
         }
+        System.out.println(code);
     }
     public void findMethodCalls() {
         ArrayList <String> methodCalls = new ArrayList<>();
+        Pattern getFunctionCalls = Pattern.compile("(([a-z<>\\.\\[\\]])*?)\\s*(\\()(.*)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
+        Matcher functionCallMatcher = getFunctionCalls.matcher(code);
+        while (functionCallMatcher.find()) {
+            methodCalls.add(functionCallMatcher.group());
 
+        }
+        for (String method : methodCalls){
+            System.out.println(method);
+        }
 
     }
 
