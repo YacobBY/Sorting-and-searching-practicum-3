@@ -39,13 +39,12 @@ public class LanguageDetector {
 
     public void alphabetCounter() {
         //Makes array with 123 slots, only 97 to 122 will be used
-        letterCount = new int[123];
-        for (int i = 0; i < 123; i++) {
+        letterCount = new int[2000];
+        for (int i = 0; i < 2000; i++) {
             letterCount[i] = 0; // -1 for chars not in pattern
-            System.out.println(letterCount[i]);
+//            System.out.println(letterCount[i]);
         }
         System.out.println("----------------------");
-
         for (int i = 'a'; i <= 'z'; i++) {
             Pattern letterPattern = Pattern.compile("" + (char) i, Pattern.MULTILINE | Pattern.COMMENTS);
             Matcher letterMatcher = letterPattern.matcher(docs);
@@ -56,6 +55,9 @@ public class LanguageDetector {
             System.out.println(letterCount[i]);
         }
     }
+
+
+
 }
 //a = 97
 //z = 122
