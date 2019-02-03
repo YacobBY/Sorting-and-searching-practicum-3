@@ -13,7 +13,6 @@ public class LanguageDetector {
     private String docs;
     private int letterCount[];
 
-
     public LanguageDetector(InputStream input) {
         Scanner sc = new Scanner(input);
         sc.useDelimiter("\\Z"); // EOF marker
