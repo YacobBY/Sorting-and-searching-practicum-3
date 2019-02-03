@@ -2,7 +2,6 @@ package nl.hva.ict.ss.textsearch;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +17,7 @@ public class LanguageDetector {
         sc.useDelimiter("\\Z"); // EOF marker
         content = (sc.next());
         separateDocsFromCode();
-        alphabetCounter();
+//        alphabetCounter();
 
     }
 
@@ -39,6 +38,17 @@ public class LanguageDetector {
 //        System.out.println("-----------------------------");
 //        System.out.println(code);
     }
+
+    public void methodCounter(){
+
+        
+    }
+
+
+
+
+
+
 
     public void alphabetCounter() {
         ArrayList<String> characters = new ArrayList<>();
@@ -74,7 +84,7 @@ public class LanguageDetector {
             if (biggestNumber > 0) {
                 totalLetters += biggestNumber;
                 characters.add("" + (char) biggestIndex);
-                count.add( biggestNumber);
+                count.add(biggestNumber);
                 lettersInCountingOrder += "" + (char) biggestIndex;
 
                 letterCount[biggestIndex] = 0;
@@ -85,22 +95,22 @@ public class LanguageDetector {
             }
         }
         System.out.println(totalLetters);
-        LanguageList langTemp =  new LanguageList();
-        LanguageList langFinal =  new LanguageList();
+        LanguageList langTemp = new LanguageList();
+        LanguageList langFinal = new LanguageList();
 
         System.out.println(langTemp.languageLettersList.size());
-        ArrayList<LanguageLetters> languageList  = langTemp.languageLettersList;
-        ArrayList<LanguageLetters> finalList  = langFinal.languageLettersList;
+        ArrayList<LanguageLetters> languageList = langTemp.languageLettersList;
+        ArrayList<LanguageLetters> finalList = langFinal.languageLettersList;
 
         ArrayList<LanguageLetters> toRemove = new ArrayList<>();
-            //while there are languageList left
+        //while there are languageList left
         int listCounter = 0;
-        int langsize  = languageList.size();
-        while (toRemove.size() < langsize){
-            for (LanguageLetters language : languageList){
+        int langsize = languageList.size();
+        while (toRemove.size() < langsize) {
+            for (LanguageLetters language : languageList) {
                 if (language.getLetters().charAt(listCounter) != lettersInCountingOrder.charAt(listCounter)) {
-                    System.out.println("Next letter is: "+ lettersInCountingOrder.charAt(listCounter));
-                    System.out.println("removing "+language.getLanguage());
+                    System.out.println("Next letter is: " + lettersInCountingOrder.charAt(listCounter));
+                    System.out.println("removing " + language.getLanguage());
                     toRemove.add(language);
                 }
             }
@@ -111,23 +121,21 @@ public class LanguageDetector {
             languageList.removeAll(toRemove);
 
             listCounter++;
-            if (languageList.size()<1){
+            if (languageList.size() < 1) {
 
-            System.out.println("Languages left: ");
-            for (LanguageLetters language : finalList){
-                System.out.println(language.getLanguage());
+                System.out.println("Languages left: ");
+                for (LanguageLetters language : finalList) {
+                    System.out.println(language.getLanguage());
+                }
+                break;
             }
-            break;
-            }
-
-
         }
         System.out.println("Now printing all characters with their percentage of occurance");
         for (int i = 0; i < characters.size(); i++) {
 
-            Double c =  Double.valueOf(count.get(i));
-            Double total =  Double.valueOf(totalLetters);
-            System.out.println(characters.get(i)+" occurred " +  (c/total)*100+ "%");
+            Double c = Double.valueOf(count.get(i));
+            Double total = Double.valueOf(totalLetters);
+            System.out.println(characters.get(i) + " occurred " + (c / total) * 100 + "%");
         }
     }
 
