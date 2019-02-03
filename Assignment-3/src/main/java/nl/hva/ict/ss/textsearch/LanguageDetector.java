@@ -41,7 +41,7 @@ public class LanguageDetector {
 
     public void methodCounter(){
 
-        
+
     }
 
 
