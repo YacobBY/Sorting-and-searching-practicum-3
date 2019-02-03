@@ -10,7 +10,7 @@ public class LanguageDetector {
     private String code;
     private String docs;
     private int letterCount[];
-    private String commonLetters;
+
 
     public LanguageDetector(InputStream input) {
         Scanner sc = new Scanner(input);
@@ -18,7 +18,7 @@ public class LanguageDetector {
         content = (sc.next());
         separateDocsFromCode();
         alphabetCounter();
-        commonLetters = "";
+
     }
 
     public void separateDocsFromCode() {
@@ -40,6 +40,7 @@ public class LanguageDetector {
     }
 
     public void alphabetCounter() {
+         String commonLetters = "";
         //Makes array with 123 slots, only 97 to 122 will be used
         letterCount = new int[123];
         for (int i = 0; i < 123; i++) {
@@ -57,23 +58,27 @@ public class LanguageDetector {
             System.out.println(letterCount[i]);
         }
         while (true) {
+            int biggestNumber = 0;
             int biggestIndex = 0;
             for (int i = 0; i < 123; i++) {
-                System.out.println(letterCount[i]);
-                if (letterCount[i] > biggestIndex) {
+
+                if (letterCount[i] > biggestNumber) {
+
                     biggestIndex = i;
+                    biggestNumber = letterCount[i];
                 }
             }
 
 
-            if (letterCount[biggestIndex] >0 ){
-                System.out.println(commonLetters);
+            if (biggestNumber >0 ){
+//                System.out.println(commonLetters);
                 commonLetters+= ""+(char)biggestIndex;
                 letterCount[biggestIndex] = 0;
+                System.out.println(commonLetters);
             }
 
             else {
-                System.out.println(commonLetters);
+//                System.out.println(commonLetters);
                 break;
             }
         }
