@@ -3,6 +3,7 @@ package nl.hva.ict.ss.textsearch;
 public class BoyerMoore {
     private int[] right;
     private String pat;
+    public static int counter;
 
     BoyerMoore(String pat) { // Compute skip table.
         this.pat = pat;
@@ -47,8 +48,9 @@ public class BoyerMoore {
                 System.out.println("Skipped "+skip);
                 System.out.println("needle: " + pat.charAt(j) + " Haystack: " + txt.charAt(i+j));
                 System.out.println("Current index is: " + i + " pattern index is " + j);
+                counter++;
                 if (pat.charAt(j) != txt.charAt(i + j)) {
-                    //counter++
+
                     skip = j - right[txt.charAt(i + j)];
                     if (skip < 1) skip = 1;
                     System.out.println("Skip amount is: "+ skip );
@@ -58,6 +60,7 @@ public class BoyerMoore {
                     System.out.println(j);
                 }
             }
+            System.out.println("Amount of comparisons done is: " + counter);
             if (skip == 0) return i; // found.
         }
         return tL; // not found.

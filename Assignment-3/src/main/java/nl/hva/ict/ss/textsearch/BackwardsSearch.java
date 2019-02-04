@@ -48,15 +48,15 @@ public class BackwardsSearch {
         //Begin aan het einde ipv begin                                    Amount to skip is subtracted ipv added
         for (int textIndex = textlength - patternLength; textIndex >= 0; textIndex -= amountToSkip) {
             amountToSkip = 0;
-            searchComparisons++;
             //Reverse here
 //
 
             for (int patternIndex = 0; patternIndex < patternLength; patternIndex++) {
                 System.out.println("Needle  " + pattern.charAt(patternIndex) + " Haystack   " + text.charAt(textIndex));
                 System.out.println("Text index: " + textIndex + " Pattern index " + patternIndex);
+                searchComparisons++;
+
                 if (pattern.charAt(patternIndex) != text.charAt(textIndex+patternIndex)) {
-                    searchComparisons++;
                     amountToSkip =  (patternLength-1) - skipArr[text.charAt(textIndex + patternIndex)];
                     if (amountToSkip < 1) amountToSkip = 1;
                     System.out.println("Skip amount: "+ amountToSkip );
@@ -66,8 +66,10 @@ public class BackwardsSearch {
 
                 }
             }
+            System.out.println("amount of comparisons done is: "+searchComparisons);
             if (amountToSkip == 0) return textIndex;    // found
         }
+
         return -1;                       // not found
     }
 
