@@ -6,6 +6,16 @@ import static org.junit.Assert.*;
 
 public class BoyerMooreTest {
 
+    /*template
+     @Test
+    public void search() {
+        BoyerMoore boy = new BoyerMoore("");
+
+        assertEquals("".length(),boy.search(""));
+
+    }
+     */
+
     @Test
     public void search() {
         BoyerMoore boy = new BoyerMoore("needle");
@@ -33,6 +43,13 @@ public class BoyerMooreTest {
         BoyerMoore boy = new BoyerMoore("b");
 
         assertEquals("aaaa".length(),boy.search("aaaabaaaa"));
+    }
+
+    @Test
+    public void bigMiddleOfSearch(){
+        BoyerMoore boy = new BoyerMoore("nes");
+
+        assertEquals( "Thisstringcontainsalotlotlotoftextlikeaveryseriouslylargeamountoftextthesearchengi".length(),boy.search("Thisstringcontainsalotlotlotoftextlikeaveryseriouslylargeamountoftextthesearchengineswillhavetoperformalotofcomparisonsinordertofindthewordthatishiddenwithinthistext"));
     }
 
 

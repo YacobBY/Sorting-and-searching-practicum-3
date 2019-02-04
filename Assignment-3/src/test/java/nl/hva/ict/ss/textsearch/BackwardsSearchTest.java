@@ -13,8 +13,28 @@ public class BackwardsSearchTest {
 
     }
 
+       /*template
+
     @Test
-    public void largeSearch(){
+    public void findSingleOccurrence() {
+        BackwardsSearch back = new BackwardsSearch("");
+
+
+        assertEquals("".length(), back.findLocation("",""));
+    }
+
+     */
+
+    @Test
+    public void bigMiddleOfSearch() {
+        BackwardsSearch back = new BackwardsSearch("nes");
+
+
+        assertEquals("Thisstringcontainsalotlotlotoftextlikeaveryseriouslylargeamountoftextthesearchengi".length(), back.findLocation("nes","Thisstringcontainsalotlotlotoftextlikeaveryseriouslylargeamountoftextthesearchengineswillhavetoperformalotofcomparisonsinordertofindthewordthatishiddenwithinthistext"));
+    }
+
+    @Test
+    public void endOfSearch(){
         BackwardsSearch back = new BackwardsSearch("word");
 
         assertEquals("thistextcontainsa".length(),back.findLocation("word","thistextcontainsaword"));
@@ -45,7 +65,6 @@ public class BackwardsSearchTest {
     }
 
 
-
     @Test
     public void findSingleOccurrence() {
         BackwardsSearch back = new BackwardsSearch("needle");
@@ -57,7 +76,9 @@ public class BackwardsSearchTest {
     //"whereistheneedleinthishaystack");
     @Test
     public void cantFindOccurrence() {
-        int index = searchEngine.findLocation("needle", "thereisnothinginthishaystack");
+        BackwardsSearch back = new BackwardsSearch("needle");
+
+        int index = back.findLocation("needle", "thereisnothinginthishaystack");
 
         assertEquals(-1, index);
     }

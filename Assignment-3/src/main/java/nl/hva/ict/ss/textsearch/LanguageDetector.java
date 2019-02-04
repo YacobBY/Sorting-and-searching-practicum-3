@@ -20,7 +20,7 @@ public class LanguageDetector {
         separateDocsFromCode();
         removeNonMethodCalls();
         findMethodCalls();
-//        alphabetCounter();
+        alphabetCounter();
 
     }
 
@@ -65,15 +65,15 @@ public class LanguageDetector {
         }
         StringBuilder methodsFound = new StringBuilder();
         for (String method : methodCalls){
-            System.out.println(method);
+//            System.out.println(method);
             methodsFound.append(method+"\n");
         }
         String allMethods = methodsFound.toString();
 //        System.out.println("ALLMETHODS");
 //        System.out.println(allMethods); (([a-z0-9<>\.\[\]])*?)\s*(\()
 
-        System.out.println("aaa");
-        System.out.println(allMethods);
+//        System.out.println("aaa");
+        System.out.println("First method call list" + allMethods);
         Pattern getInnerFunctions = Pattern.compile("(\\(([a-z0-9<>\\-\\.\\,\\+\\/\\s\\[\\\\\\]()\"'])*?)\\s*(\\()(([a-z0-9<>\\-\\.\\,\\+\\/\\s*\\[\\\\\\]()\"'])*?)(\\))", Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher innerFunctionMatcher = getInnerFunctions.matcher(code);
         ArrayList <String> secondCalls = new ArrayList<>();
@@ -88,10 +88,12 @@ public class LanguageDetector {
             }
 
         }
+        System.out.println("Second method call list");
         for (String secondCall : secondCalls){
             System.out.println(secondCall);
 
         }
+        System.out.println("Total amount of methods found: "+(methodCalls.size()+secondCalls.size()));
 
 
     }
