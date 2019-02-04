@@ -13,18 +13,6 @@ public class BackwardsSearchTest {
 
     }
 
-       /*template
-
-    @Test
-    public void findSingleOccurrence() {
-        BackwardsSearch back = new BackwardsSearch("");
-
-
-        assertEquals("".length(), back.findLocation("",""));
-    }
-
-     */
-
     @Test
     public void bigMiddleOfSearch() {
         BackwardsSearch back = new BackwardsSearch("nes");

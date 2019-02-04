@@ -37,9 +37,13 @@ public class LanguageDetector {
             code = matcher.replaceAll("");
         }
         docs = docsBuilder.toString();
-//        System.out.println(docs);
-//        System.out.println("-----------------------------");
-//        System.out.println(code);
+        System.out.println("DOCS:");
+        System.out.println(docs);
+        System.out.println("-----------------------------");
+        System.out.println("CODE:");
+        System.out.println(code);
+        System.out.println("-----------------------------");
+
     }
 
     public void removeNonMethodCalls() {
@@ -52,7 +56,7 @@ public class LanguageDetector {
         while (letterMatcher.find()) {
             code = letterMatcher.replaceAll("");
         }
-        System.out.println(code);
+//        System.out.println(code);
 
 
     }
@@ -80,20 +84,21 @@ public class LanguageDetector {
         System.out.println("------------------------------------");
 
         while (innerFunctionMatcher.find()) {
-            String test = innerFunctionMatcher.group();
-            Matcher getFunc = getFunctionCalls.matcher(test);
+            String innerCall = innerFunctionMatcher.group();
+            Matcher getFunc = getFunctionCalls.matcher(innerCall);
             while (getFunc.find()) {
 
                 secondCalls.add(getFunc.group());
             }
 
         }
-        System.out.println("Second method call list");
+        System.out.println("Inner method calls list");
         for (String secondCall : secondCalls){
             System.out.println(secondCall);
 
         }
         System.out.println("Total amount of methods found: "+(methodCalls.size()+secondCalls.size()));
+        System.out.println("------------------------------------");
 
 
     }
@@ -117,9 +122,10 @@ public class LanguageDetector {
             while (letterMatcher.find()) {
                 letterCount[i]++;
             }
-            System.out.println(letterCount[i]);
+            System.out.println((char)i+":"+letterCount[i]);
         }
-
+        System.out.println("------------------------------------");
+        System.out.println("Letters in count order:");
         while (true) {
             int biggestNumber = 0;
             int biggestIndex = 0;
@@ -143,13 +149,15 @@ public class LanguageDetector {
                 break;
             }
         }
-        System.out.println(totalLetters);
+        System.out.println("------------------------------------");
+        System.out.println("Total amount of letters: "+totalLetters);
         LanguageList langTemp = new LanguageList();
         LanguageList langFinal = new LanguageList();
 
-        System.out.println(langTemp.languageLettersList.size());
+        System.out.println("Total amount of languages to compare: "+langTemp.languageLettersList.size());
         ArrayList<LanguageLetters> languageList = langTemp.languageLettersList;
         ArrayList<LanguageLetters> finalList = langFinal.languageLettersList;
+        System.out.println("------------------------------------");
 
         ArrayList<LanguageLetters> toRemove = new ArrayList<>();
         //while there are languageList left
@@ -171,6 +179,7 @@ public class LanguageDetector {
 
             listCounter++;
             if (languageList.size() < 1) {
+                System.out.println("------------------------------------");
 
                 System.out.println("Languages left: ");
                 for (LanguageLetters language : finalList) {
@@ -179,6 +188,8 @@ public class LanguageDetector {
                 break;
             }
         }
+        System.out.println("------------------------------------");
+
         System.out.println("Now printing all characters with their percentage of occurance");
         for (int i = 0; i < characters.size(); i++) {
 
@@ -186,6 +197,8 @@ public class LanguageDetector {
             Double total = Double.valueOf(totalLetters);
             System.out.println(characters.get(i) + " occurred " + (c / total) * 100 + "%");
         }
+        System.out.println("------------------------------------");
+
     }
 
 
